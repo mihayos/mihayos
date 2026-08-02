@@ -143,4 +143,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const backTop = document.querySelector(".fab-top");
   backTop && backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+  /* ---------- Mobile-only: reveal floating buttons only once the
+     hero has scrolled out of view (CSS hides them by default on
+     phones via .has-tall-hero, so there's no race/flash — this just
+     adds "hero-passed" once the hero is no longer in view). ---------- */
+  if (document.body.classList.contains("has-tall-hero") && "IntersectionObserver" in window) {
+    const heroEl = document.querySelector(".hero");
+    if (heroEl) {
+      const heroIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          document.body.classList.toggle("hero-passed", !entry.isIntersecting);
+        });
+      }, { threshold: 0.15 });
+      heroIO.observe(heroEl);
+    }
+  }
+
 });

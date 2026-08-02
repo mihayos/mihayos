@@ -42,23 +42,55 @@
 
 /* ---------------------------------------------------------------
    PHONE-ONLY FIX: on phones, the hero's GPS-coordinate eyebrow
-   badge could ride up under the fixed navbar (which is still
-   semi-transparent before scrolling) and visually collide with
-   "Mihayo's Safaris" and the nav icons. Desktop is untouched —
-   this only fires on narrow/phone-width viewports.
+   badge could ride up under the fixed navbar (which is normally
+   transparent-fading-to-solid before scrolling, a look that only
+   works when there's a tall hero video behind it) and visually
+   collide with "Mihayo's Safaris" and the nav icons. Desktop is
+   completely untouched — this only fires below 720px.
    --------------------------------------------------------------- */
-@media (max-width: 600px) {
-  .hero-inner { padding-top: 190px; }
+@media (max-width: 720px) {
+  /* 1) Make the navbar fully solid on phones at all times (not just
+     after scrolling) so nothing behind it can ever show through,
+     regardless of how tall the hero text stack is. */
+  .navbar { background: var(--c-primary-dark) !important; backdrop-filter: none; }
+  .navbar .brand, .navbar .nav-links a { color: #fff; }
+  .navbar .lang-btn, .navbar .currency-btn, .navbar .theme-toggle, .navbar .nav-toggle {
+    color: #fff; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+  }
+  .navbar.scrolled { background: var(--c-white) !important; }
+  .navbar.scrolled .brand, .navbar.scrolled .nav-links a { color: var(--c-text); }
+  .navbar.scrolled .lang-btn, .navbar.scrolled .currency-btn, .navbar.scrolled .theme-toggle, .navbar.scrolled .nav-toggle {
+    color: var(--c-text); border-color: var(--c-line); background: var(--c-white);
+  }
+  [data-theme="dark"] .navbar.scrolled { background: var(--c-bg) !important; }
+
+  /* 2) Give the hero generous, guaranteed clearance below that solid
+     bar, and stop bottom-anchoring the content on phones so a tall
+     text stack flows down from the top instead of any risk of
+     pushing upward past the nav. */
+  .hero { align-items: flex-start; }
+  .hero-inner { padding: 104px 0 40px; }
   .hero-eyebrow-row { margin-bottom: 16px; }
   .hero-eyebrow-row .eyebrow {
-    font-size: 10.5px; letter-spacing: 0.08em; line-height: 1.5;
+    font-size: 10.5px; letter-spacing: 0.06em; line-height: 1.5;
     white-space: normal; text-align: left; padding: 6px 12px;
   }
-  /* Give the unscrolled navbar a real backdrop on phones so nothing
-     can visually show through it, even before the user scrolls. */
-  .navbar { background: linear-gradient(180deg, rgba(7,20,15,0.75), rgba(7,20,15,0.35)); backdrop-filter: blur(6px); }
-  .navbar.scrolled { background: rgba(248, 249, 250, 0.9); }
-  [data-theme="dark"] .navbar.scrolled { background: rgba(14, 21, 18, 0.92); }
+
+  /* Safe-by-default: hide the floating buttons the instant CSS paints
+     (before any JS runs), so there's never even a brief flash of
+     overlap with the hero's stacked CTA buttons. JS below reveals
+     them once the hero has scrolled out of view. */
+  .has-tall-hero .floating-actions,
+  .has-tall-hero #aiFab,
+  .has-tall-hero #wishlistFab {
+    opacity: 0; pointer-events: none; transition: opacity .3s ease;
+  }
+  .has-tall-hero.hero-passed .floating-actions,
+  .has-tall-hero.hero-passed #aiFab,
+  .has-tall-hero.hero-passed #wishlistFab {
+    opacity: 1; pointer-events: auto;
+  }
+  .has-tall-hero.hero-passed #wishlistFab.empty { opacity: 0; pointer-events: none; }
 }
 
 @media (max-width: 480px) {
