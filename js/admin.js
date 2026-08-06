@@ -18,7 +18,7 @@
    fetch() calls against that API.
    ========================================================= */
 
-const ADMIN_DEMO_USER = "admin@mihayossafaris.com";
+const ADMIN_DEMO_USER = "admin@mihayosafaris.com";
 const ADMIN_DEMO_PASS = "demo123";
 
 /* ---------------- Demo data (in-memory only) ---------------- */
