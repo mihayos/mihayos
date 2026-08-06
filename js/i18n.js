@@ -14,7 +14,9 @@ function applyTranslations(lang) {
   if (!TRANSLATIONS[lang]) lang = DEFAULT_LANG;
   currentLang = lang;
   document.documentElement.setAttribute("lang", lang);
-  document.documentElement.setAttribute("dir", "ltr");
+  const isRTL = (lang === "ar");
+  document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+  document.body.classList.toggle("rtl-mode", isRTL);
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");

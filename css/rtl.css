@@ -1,0 +1,81 @@
+/* =========================================================
+   MIHAYO'S SAFARIS — RTL (Arabic) support
+   Loaded on every page. Scoped entirely under [dir="rtl"], so it
+   only ever applies when the visitor selects Arabic — every other
+   language is completely unaffected.
+
+   HONEST SCOPE NOTE: this covers the fonts, reading direction,
+   and the highest-impact layout mirroring (nav dropdowns, icons
+   that imply direction, text alignment). Flexbox/Grid layouts
+   (navbar, hero buttons, footer columns, card grids) reorder
+   automatically under dir="rtl" per the CSS spec, so most of the
+   site mirrors correctly "for free." A handful of small,
+   decorative, absolutely-positioned elements (GPS-stamp badges,
+   floating action buttons, wishlist hearts) intentionally keep
+   their original screen corner rather than being individually
+   re-plotted — a full pixel-for-pixel mirror of every absolutely
+   positioned element sitewide is a larger design pass than an
+   "add Arabic" language request calls for.
+   ========================================================= */
+
+[dir="rtl"] body,
+[dir="rtl"] .brand,
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4,
+[dir="rtl"] .eyebrow, [dir="rtl"] .btn, [dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] select {
+  font-family: 'Cairo', 'Inter', -apple-system, sans-serif;
+}
+
+/* Korean reads left-to-right, so it only needs a proper Hangul-
+   supporting webfont — no direction/mirroring changes required. */
+html[lang="ko"] body,
+html[lang="ko"] .brand,
+html[lang="ko"] h1, html[lang="ko"] h2, html[lang="ko"] h3, html[lang="ko"] h4,
+html[lang="ko"] .eyebrow, html[lang="ko"] .btn,
+html[lang="ko"] input, html[lang="ko"] textarea, html[lang="ko"] select {
+  font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+}
+
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .text-muted, [dir="rtl"] p { text-align: right; }
+[dir="rtl"] .section-head.center, [dir="rtl"] .testi-carousel, [dir="rtl"] .brand-promise-inner { text-align: center; }
+
+/* Nav dropdowns anchor from the opposite side in RTL */
+[dir="rtl"] .lang-menu, [dir="rtl"] .currency-menu { right: auto; left: 0; }
+[dir="rtl"] .lang-menu button, [dir="rtl"] .currency-menu button { text-align: right; }
+
+/* Directional icons — arrows and chevrons need to point the other way */
+[dir="rtl"] .fa-arrow-right, [dir="rtl"] .fa-arrow-left,
+[dir="rtl"] .meta-row .fa-arrow-right,
+[dir="rtl"] .dest-card .fa-arrow-right,
+[dir="rtl"] .btn .fa-arrow-right {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .breadcrumb { direction: rtl; }
+
+/* Eyebrow badge icon sits after the text now */
+[dir="rtl"] .eyebrow::before { margin-left: 8px; margin-right: 0; }
+
+/* Search card, form groups, and labels read right-to-left */
+[dir="rtl"] .search-field label,
+[dir="rtl"] .form-group label,
+[dir="rtl"] .calc-group label { text-align: right; }
+
+/* Explorer console + weather spin text blocks */
+[dir="rtl"] .explorer-overlay, [dir="rtl"] .calc-breakdown-row,
+[dir="rtl"] .weather-meta-row, [dir="rtl"] .admin-stat-card { text-align: right; }
+
+/* Testimonial carousel arrows swap sides to match reversed reading order */
+[dir="rtl"] .testi-nav.prev { right: -22px; left: auto; }
+[dir="rtl"] .testi-nav.next { left: -22px; right: auto; }
+[dir="rtl"] .testi-nav i { transform: scaleX(-1); }
+
+/* FAQ / accordion chevrons */
+[dir="rtl"] .faq-q { flex-direction: row-reverse; }
+
+/* Mobile nav CTA + off-canvas menu text alignment */
+[dir="rtl"] .mobile-nav a { text-align: right; }
+
+@media (max-width: 720px) {
+  [dir="rtl"] .testi-nav.prev { right: 4px; }
+  [dir="rtl"] .testi-nav.next { left: 4px; }
+}

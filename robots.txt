@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
-Sitemap: https://mihayossafaris.com/sitemap.xml
+Sitemap: https://mihayosafaris.com/sitemap.xml
