@@ -16,8 +16,10 @@
 <meta property="og:description" content="Locally-owned safaris across the Serengeti, Kilimanjaro, and Zanzibar — planned by people who grew up on this ground.">
 <meta property="og:url" content="https://mihayosafaris.com/">
 <meta property="og:site_name" content="Mihayo's Safaris">
-<meta property="og:image" content="https://mihayosafaris.com/images/og-cover.jpg">
+<meta property="og:image" content="https://mihayosafaris.com/images/gallery/kili-zebras-wildebeest.jpg">
+<meta property="og:image:width" content="1400">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mihayosafaris.com/images/gallery/kili-zebras-wildebeest.jpg">
 <meta name="twitter:title" content="Mihayo's Safaris | Tanzania & Zanzibar Safari Tours">
 <meta name="twitter:description" content="Serengeti migrations, Kilimanjaro summits, and Zanzibar sandbanks — planned by locals.">
 
@@ -26,12 +28,13 @@
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Cairo:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <!-- Styles -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/rtl.css">
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -40,13 +43,35 @@
   "@type": "TravelAgency",
   "name": "Mihayo's Safaris",
   "url": "https://mihayosafaris.com",
-  "image": "https://mihayosafaris.com/images/og-cover.jpg",
-  "telephone": "+255-700-000-000",
+  "logo": "https://mihayosafaris.com/images/logo.png",
+  "image": "https://mihayosafaris.com/images/gallery/kili-zebras-wildebeest.jpg",
+  "telephone": "+44-7504-988729",
+  "email": "sizyakatema@yahoo.com",
+  "founder": [
+    { "@type": "Person", "name": "Mihayo Sizya", "jobTitle": "Founder & CEO" },
+    { "@type": "Person", "name": "Yohana Samweli", "jobTitle": "Co-Founder & CTO" }
+  ],
+  "foundingDate": "2020",
+  "foundingLocation": {
+    "@type": "Place",
+    "address": { "@type": "PostalAddress", "addressRegion": "Pwani", "addressCountry": "TZ" }
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Serengeti Road, Njiro",
     "addressLocality": "Arusha",
     "addressCountry": "TZ"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -3.3869,
+    "longitude": 36.6989
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "08:00",
+    "closes": "18:00"
   },
   "areaServed": "Tanzania",
   "priceRange": "$$-$$$$"
@@ -68,9 +93,6 @@
         <li><a href="kilimanjaro.html" data-i18n="nav.kilimanjaro">Kilimanjaro</a></li>
         <li><a href="zanzibar.html" data-i18n="nav.zanzibar">Zanzibar</a></li>
         <li><a href="hotels.html" data-i18n="nav.hotels">Hotels</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="admin.html">Admin</a></li>
         <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </nav>
@@ -85,8 +107,8 @@
           <button data-lang-option="zh">中文</button>
           <button data-lang-option="it">Italiano</button>
           <button data-lang-option="de">Deutsch</button>
-
-          
+          <button data-lang-option="ar">العربية</button>
+          <button data-lang-option="ko">한국어</button>
         </div>
       </div>
       <div class="currency-switch">
@@ -117,9 +139,6 @@
   <a href="kilimanjaro.html" data-i18n="nav.kilimanjaro">Kilimanjaro</a>
   <a href="zanzibar.html" data-i18n="nav.zanzibar">Zanzibar</a>
   <a href="hotels.html" data-i18n="nav.hotels">Hotels</a>
-  <a href="blog.html">Blog</a>
-  <a href="faq.html">FAQ</a>
-  <a href="admin.html">Admin</a>
   <a href="contact.html" data-i18n="nav.contact">Contact</a>
   <a href="contact.html" class="btn btn-gold mobile-nav-cta" data-i18n="nav.book">Plan My Safari</a>
 </div>
@@ -834,7 +853,7 @@
       <div>
         <img src="images/logo.png" alt="Mihayo's Safaris logo" style="width:64px;height:64px;border-radius:50%;background:#FDF8ED;padding:3px;margin-bottom:14px;">
         <h4 data-i18n="footer.about.title">Mihayo's Safaris</h4>
-        <p data-i18n="footer.about.text">Tanzanian-owned safari and travel operator based in Arusha, running trips across the Northern and Southern Circuits, Kilimanjaro, and Zanzibar since 2009.</p>
+        <p data-i18n="footer.about.text">Tanzanian-owned safari and travel operator founded in Pwani in 2020, now based in Arusha, running trips across the Northern and Southern Circuits, Kilimanjaro, and Zanzibar.</p>
         <div class="social-row">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -986,4 +1005,3 @@
 <script src="js/mihayo-ai.js"></script>
 </body>
 </html>
-
