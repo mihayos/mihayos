@@ -176,6 +176,45 @@ img { max-width: 100%; display: block; }
 .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--c-accent); transition: width .25s ease; }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
+.services-nav { position: relative; }
+.services-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: none; padding: 4px 0; cursor: pointer;
+  font: inherit; font-weight: 600; font-size: 0.88rem;
+  color: rgba(255,255,255,0.92);
+}
+.navbar.scrolled .services-toggle { color: var(--c-text); }
+.services-toggle i { font-size: 0.75rem; transition: transform .2s ease; }
+.services-nav.open .services-toggle i { transform: rotate(180deg); }
+.services-menu {
+  position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 4px;
+  min-width: 180px; padding: 10px; border: 1px solid var(--c-line);
+  border-radius: var(--radius-sm); background: var(--c-white); box-shadow: var(--shadow-soft);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: all .2s ease; z-index: 1100;
+}
+.services-nav.open .services-menu { opacity: 1; visibility: visible; pointer-events: auto; }
+.services-menu a {
+  color: var(--c-text); font-size: 0.9rem; padding: 8px 10px; border-radius: 6px;
+}
+.services-menu a:hover { background: var(--c-sand); color: var(--c-primary); }
+
+.mobile-nav .services-nav { display: flex; flex-direction: column; align-items: flex-start; }
+.mobile-nav .services-toggle {
+  width: 100%; justify-content: space-between; color: #fff; font-size: 1.3rem; font-weight: 700;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.mobile-nav .services-menu {
+  position: static; transform: none; min-width: 100%; padding: 0 0 0 16px; border: none; box-shadow: none;
+  background: transparent; opacity: 0; visibility: hidden; pointer-events: none; display: none;
+}
+.mobile-nav .services-nav.open .services-menu {
+  display: flex; opacity: 1; visibility: visible; pointer-events: auto;
+}
+.mobile-nav .services-menu a {
+  color: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 600; padding: 10px 0; border-bottom: none;
+}
+
 .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .mobile-nav-cta { display: block; text-align: center; margin-top: 20px; width: 100%; }
 

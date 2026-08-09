@@ -26,6 +26,35 @@ document.addEventListener("DOMContentLoaded", () => {
     a.addEventListener("click", () => document.body.classList.remove("nav-open"))
   );
 
+  /* ---------- Services dropdown ---------- */
+  document.querySelectorAll(".services-toggle").forEach(toggle => {
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const item = toggle.closest(".services-nav");
+      if (!item) return;
+      const isOpen = item.classList.contains("open");
+      document.querySelectorAll(".services-nav.open").forEach(openItem => {
+        openItem.classList.remove("open");
+        const openToggle = openItem.querySelector(".services-toggle");
+        if (openToggle) openToggle.setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+  document.querySelectorAll(".services-menu").forEach(menu => {
+    menu.addEventListener("click", (e) => e.stopPropagation());
+  });
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".services-nav.open").forEach(item => {
+      item.classList.remove("open");
+      const toggle = item.querySelector(".services-toggle");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
   /* ---------- Language dropdown open/close ---------- */
   const langSwitch = document.querySelector(".lang-switch");
   const langBtn = document.querySelector(".lang-btn");
