@@ -42,30 +42,17 @@
 
 /* ---------------------------------------------------------------
    PHONE-ONLY FIX: on phones, the hero's GPS-coordinate eyebrow
-   badge could ride up under the fixed navbar (which is normally
-   transparent-fading-to-solid before scrolling, a look that only
-   works when there's a tall hero video behind it) and visually
-   collide with "Mihayo's Safaris" and the nav icons. Desktop is
-   completely untouched — this only fires below 720px.
+   badge could ride up under the fixed navbar and visually collide
+   with "Mihayo's Safaris" and the nav icons. The real fix is
+   giving the hero generous top clearance and not bottom-anchoring
+   its content (below) — the navbar itself now behaves exactly like
+   desktop (transparent over the hero, solid once scrolled), no
+   separate phone-only navbar styling. Desktop is untouched — this
+   only fires below 720px.
    --------------------------------------------------------------- */
 @media (max-width: 720px) {
-  /* 1) Make the navbar fully solid on phones at all times (not just
-     after scrolling) so nothing behind it can ever show through,
-     regardless of how tall the hero text stack is. */
-  .navbar { background: var(--c-primary-dark) !important; backdrop-filter: none; }
-  .navbar .brand, .navbar .nav-links a { color: #fff; }
-  .navbar .lang-btn, .navbar .currency-btn, .navbar .theme-toggle, .navbar .nav-toggle {
-    color: #fff; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
-  }
-  .navbar.scrolled { background: var(--c-white) !important; }
-  .navbar.scrolled .brand, .navbar.scrolled .nav-links a { color: var(--c-text); }
-  .navbar.scrolled .lang-btn, .navbar.scrolled .currency-btn, .navbar.scrolled .theme-toggle, .navbar.scrolled .nav-toggle {
-    color: var(--c-text); border-color: var(--c-line); background: var(--c-white);
-  }
-  [data-theme="dark"] .navbar.scrolled { background: var(--c-bg) !important; }
-
-  /* 2) Give the hero generous, guaranteed clearance below that solid
-     bar, and stop bottom-anchoring the content on phones so a tall
+  /* Give the hero generous, guaranteed clearance below the navbar,
+     and stop bottom-anchoring the content on phones so a tall
      text stack flows down from the top instead of any risk of
      pushing upward past the nav. */
   .hero { align-items: flex-start; }
