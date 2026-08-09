@@ -30,19 +30,19 @@
 
     <form id="adminLoginForm">
       <div class="form-group">
-        <label>Email</label>
-        <input type="text" id="adminUser" required autocomplete="username">
+        <label>Username</label>
+        <input type="text" id="adminUser" required autocomplete="username" value="mihayosafaris">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="adminPass" required autocomplete="current-password">
+        <input type="password" id="adminPass" required autocomplete="current-password" value="admin">
       </div>
       <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
     </form>
 
     <div class="admin-login-note">
       <strong>Demo credentials</strong> (shown here only because this is a sandbox demo — never expose real credentials on a login screen):<br>
-      Email: <code>mihayosafaris</code><br>
+      Username: <code>mihayosafaris</code><br>
       Password: <code>admin</code><br><br>
       This login check runs entirely in your browser's JavaScript with no server behind it — anyone can read the password in view-source. It exists purely to demonstrate the dashboard UI, and must be replaced with real backend authentication before this ever holds real data.
     </div>
