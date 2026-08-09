@@ -308,7 +308,7 @@ img { max-width: 100%; display: block; }
   background: radial-gradient(ellipse at bottom left, rgba(255,209,102,0.18), transparent 55%);
   pointer-events: none;
 }
-.hero-inner { position: relative; z-index: 2; padding: 260px 0 90px; width: 100%; color: #fff; }
+.hero-inner { position: relative; z-index: 2; padding: 200px 0 90px; width: 100%; color: #fff; }
 .hero-eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
 .hero-eyebrow-row .eyebrow { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); color: #FFE9B8; }
 .hero h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); color: #fff; max-width: 850px; margin: 0 0 22px; }
