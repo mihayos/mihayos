@@ -155,7 +155,7 @@ img { max-width: 100%; display: block; }
   transition: background .35s ease, box-shadow .35s ease, height .35s ease, backdrop-filter .35s ease;
 }
 .navbar .container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1320px; gap: 18px; }
-.navbar nav { flex: 1; min-width: 0; display: flex; justify-content: center; overflow: hidden; }
+.navbar nav { flex: 1; min-width: 0; display: flex; justify-content: center; overflow: visible; }
 .navbar.scrolled {
   height: 68px;
   background: rgba(248, 249, 250, 0.85);
