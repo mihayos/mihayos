@@ -18,8 +18,8 @@
    fetch() calls against that API.
    ========================================================= */
 
-const ADMIN_DEMO_USER = "admin@mihayosafaris.com";
-const ADMIN_DEMO_PASS = "demo123";
+const ADMIN_DEMO_USER = "mihayosafaris";
+const ADMIN_DEMO_PASS = "admin";
 
 /* ---------------- Demo data (in-memory only) ---------------- */
 let inquiries = [

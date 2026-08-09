@@ -30,8 +30,10 @@
   .search-card { grid-template-columns: 1fr; margin-top: -40px; padding: 20px; }
   footer .foot-grid { grid-template-columns: 1fr; gap: 30px; }
   .hero-inner { padding: 150px 0 60px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hero-stats .btn { grid-column: auto; }
   .cta-band { padding: 40px 24px; }
   .masonry { columns: 2 160px; }
   .form-card { padding: 24px; }
@@ -82,6 +84,7 @@
 
 @media (max-width: 480px) {
   .hero-stats { grid-template-columns: 1fr; gap: 14px; }
+  .hero-actions .btn, .hero-stats .btn { font-size: 0.92rem; padding: 12px 16px; }
   .masonry { columns: 1; }
   .container { padding: 0 18px; }
 
