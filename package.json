@@ -1,0 +1,11 @@
+{
+  "name": "mihayos-safaris-cloudflare",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev . --d1=DB --local",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.81.0"
+  }
+}

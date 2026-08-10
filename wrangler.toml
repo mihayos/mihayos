@@ -1,0 +1,12 @@
+name = "mihayos-safaris"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+[vars]
+ADMIN_USERNAME = "mihayosafaris"
+ADMIN_PASSWORD = "admin"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mihayos-safaris"
+database_id = "replace-with-your-d1-id"

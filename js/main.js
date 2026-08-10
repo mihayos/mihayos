@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Form validation (contact / booking) ---------- */
   document.querySelectorAll("form[data-validate]").forEach(form => {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       let valid = true;
       form.querySelectorAll("[required]").forEach(field => {
@@ -139,23 +139,101 @@ document.addEventListener("DOMContentLoaded", () => {
           group && group.classList.remove("error");
         }
       });
+
+      if (!valid) return;
+
+      const submitBtn = form.querySelector("button[type='submit']");
+      const originalText = submitBtn ? submitBtn.innerHTML : "";
       const successBox = form.querySelector(".form-success");
-      if (valid) {
+      const errorBox = form.querySelector(".form-error") || document.createElement("p");
+
+      if (!form.querySelector(".form-error")) {
+        errorBox.className = "form-error";
+        errorBox.style.display = "none";
+        errorBox.style.marginTop = "12px";
+        errorBox.style.color = "var(--c-accent)";
+        form.appendChild(errorBox);
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+      }
+
+      try {
+        const payload = {
+          name: form.querySelector('[name="name"]').value.trim(),
+          email: form.querySelector('[name="email"]').value.trim(),
+          phone: form.querySelector('[name="phone"]').value.trim(),
+          travelDates: form.querySelector('[name="travelDates"]').value.trim(),
+          message: form.querySelector('[name="message"]').value.trim()
+        };
+
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || "Unable to send enquiry");
+        }
+
         form.style.display = "none";
         if (successBox) successBox.style.display = "block";
+        errorBox.style.display = "none";
+      } catch (error) {
+        errorBox.textContent = error.message || "Unable to send enquiry";
+        errorBox.style.display = "block";
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
       }
     });
   });
 
   /* ---------- Newsletter forms (footer) ---------- */
   document.querySelectorAll(".foot-newsletter-form").forEach(f => {
-    f.addEventListener("submit", (e) => {
+    f.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = f.querySelector("button");
-      const original = btn.textContent;
-      btn.textContent = "✓";
-      setTimeout(() => btn.textContent = original, 2000);
-      f.reset();
+      const original = btn ? btn.textContent : "Subscribe";
+      const emailInput = f.querySelector("input[type='email']");
+      const email = emailInput ? emailInput.value.trim() : "";
+
+      if (!email) return;
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "…";
+      }
+
+      try {
+        const response = await fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || "Unable to subscribe");
+        }
+
+        if (btn) btn.textContent = "✓";
+        f.reset();
+      } catch (error) {
+        if (btn) btn.textContent = "Try again";
+      } finally {
+        setTimeout(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = original;
+          }
+        }, 2200);
+      }
     });
   });
 
