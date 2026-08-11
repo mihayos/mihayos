@@ -9,4 +9,4 @@ ADMIN_PASSWORD = "admin"
 [[d1_databases]]
 binding = "DB"
 database_name = "mihayos-safaris"
-database_id = "replace-with-your-d1-id"
+database_id = "e140ff0e-4a7a-4779-b213-6e728ed9e30d"
