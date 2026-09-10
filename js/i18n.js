@@ -12,16 +12,19 @@ const LANG_LS_KEY = "mihayo_lang";
 let currentLang = DEFAULT_LANG;
 
 function applyTranslations(lang) {
-  if (!TRANSLATIONS[lang]) lang = DEFAULT_LANG;
-  currentLang = lang;
+  // normalize input and fallback
+  let chosen = (lang || "").toLowerCase();
+  if (!TRANSLATIONS[chosen]) chosen = DEFAULT_LANG;
+  currentLang = chosen;
   document.documentElement.setAttribute("lang", lang);
-  const isRTL = (lang === "ar");
+  document.documentElement.setAttribute("lang", currentLang);
+  const isRTL = (currentLang === "ar");
   document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
   document.body.classList.toggle("rtl-mode", isRTL);
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    const dict = TRANSLATIONS[lang] || {};
+    const dict = TRANSLATIONS[currentLang] || {};
     const defaultDict = TRANSLATIONS[DEFAULT_LANG] || {};
     const text = (dict[key] !== undefined)
       ? dict[key]
@@ -31,7 +34,7 @@ function applyTranslations(lang) {
 
   document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
     const key = el.getAttribute("data-i18n-ph");
-    const dict = TRANSLATIONS[lang] || {};
+    const dict = TRANSLATIONS[currentLang] || {};
     const defaultDict = TRANSLATIONS[DEFAULT_LANG] || {};
     const ph = (dict[key] !== undefined)
       ? dict[key]
@@ -40,18 +43,24 @@ function applyTranslations(lang) {
   });
 
   document.querySelectorAll(".lang-current").forEach((el) => {
-    el.textContent = lang.toUpperCase();
+    el.textContent = currentLang.toUpperCase();
   });
 
   document.querySelectorAll("[data-lang-option]").forEach((el) => {
-    el.classList.toggle("active", el.getAttribute("data-lang-option") === lang);
+    el.classList.toggle("active", el.getAttribute("data-lang-option") === currentLang);
   });
 }
 
 function setLang(lang) {
-  applyTranslations(lang);
+  // normalize and apply
+  const normalized = (lang || "").toLowerCase();
+  applyTranslations(normalized);
   try {
-    localStorage.setItem(LANG_LS_KEY, currentLang);
+    if (currentLang === DEFAULT_LANG) {
+      localStorage.removeItem(LANG_LS_KEY);
+    } else {
+      localStorage.setItem(LANG_LS_KEY, currentLang);
+    }
   } catch (e) {
     /* ignore storage errors (privacy mode) */
   }
@@ -60,7 +69,8 @@ function setLang(lang) {
 document.addEventListener("DOMContentLoaded", () => {
   // prefer saved language from localStorage when available
   let saved = null;
-  try { saved = localStorage.getItem(LANG_LS_KEY); } catch (e) { saved = null; }
+  try { saved = (localStorage.getItem(LANG_LS_KEY) || null); } catch (e) { saved = null; }
+  if (saved) saved = saved.toLowerCase();
   const initial = (saved && TRANSLATIONS[saved]) ? saved : DEFAULT_LANG;
   applyTranslations(initial);
 
