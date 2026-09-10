@@ -8,6 +8,7 @@
    this is wired to a backend.
    ========================================================= */
 
+const LANG_LS_KEY = "mihayo_lang";
 let currentLang = DEFAULT_LANG;
 
 function applyTranslations(lang) {
@@ -49,10 +50,19 @@ function applyTranslations(lang) {
 
 function setLang(lang) {
   applyTranslations(lang);
+  try {
+    localStorage.setItem(LANG_LS_KEY, currentLang);
+  } catch (e) {
+    /* ignore storage errors (privacy mode) */
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyTranslations(DEFAULT_LANG);
+  // prefer saved language from localStorage when available
+  let saved = null;
+  try { saved = localStorage.getItem(LANG_LS_KEY); } catch (e) { saved = null; }
+  const initial = (saved && TRANSLATIONS[saved]) ? saved : DEFAULT_LANG;
+  applyTranslations(initial);
 
   document.querySelectorAll("[data-lang-option]").forEach((btn) => {
     btn.addEventListener("click", (e) => {

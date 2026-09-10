@@ -257,6 +257,7 @@ const TRANSLATIONS = {
 
     "footer.newsletter.ph": "Twój e-mail"
   },
+  en: {
     "about.mission.text": "Design safaris and climbs that are logistically flawless, financially transparent, and economically rooted in the communities that host them.",
     "about.vision.title": "Vision",
     "about.vision.text": "A Tanzania where tourism revenue visibly strengthens the conservancies, schools, and households nearest the parks — not just the capital city.",
