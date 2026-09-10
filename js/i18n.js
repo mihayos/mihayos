@@ -20,18 +20,22 @@ function applyTranslations(lang) {
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    const dict = TRANSLATIONS[lang];
-    if (dict && dict[key] !== undefined) {
-      el.textContent = dict[key];
-    }
+    const dict = TRANSLATIONS[lang] || {};
+    const defaultDict = TRANSLATIONS[DEFAULT_LANG] || {};
+    const text = (dict[key] !== undefined)
+      ? dict[key]
+      : (defaultDict[key] !== undefined ? defaultDict[key] : el.textContent);
+    el.textContent = text;
   });
 
   document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
     const key = el.getAttribute("data-i18n-ph");
-    const dict = TRANSLATIONS[lang];
-    if (dict && dict[key] !== undefined) {
-      el.setAttribute("placeholder", dict[key]);
-    }
+    const dict = TRANSLATIONS[lang] || {};
+    const defaultDict = TRANSLATIONS[DEFAULT_LANG] || {};
+    const ph = (dict[key] !== undefined)
+      ? dict[key]
+      : (defaultDict[key] !== undefined ? defaultDict[key] : (el.getAttribute('placeholder') || ''));
+    el.setAttribute("placeholder", ph);
   });
 
   document.querySelectorAll(".lang-current").forEach((el) => {
