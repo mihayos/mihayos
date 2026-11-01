@@ -1,7 +1,11 @@
 # Files that must NOT be published as public static files
+.git
+.github
+.gitignore
+.wrangler
+node_modules
 functions
 src
-node_modules
 tools
 wrangler.toml
 package.json
