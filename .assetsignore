@@ -1,0 +1,10 @@
+# Files that must NOT be published as public static files
+functions
+src
+node_modules
+tools
+wrangler.toml
+package.json
+package-lock.json
+.assetsignore
+*.md

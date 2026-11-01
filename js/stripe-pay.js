@@ -18,11 +18,16 @@ document.addEventListener('click', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ package: btn.dataset.pay, quantity })
     });
-    const data = await res.json();
-    if (data.ok && data.url) { window.location.href = data.url; return; }
-    alert(data.message || 'Could not start payment. Please try again.');
+    let data = null;
+    try { data = await res.json(); } catch (_) {}
+    if (data && data.ok && data.url) { window.location.href = data.url; return; }
+    if (!data) {
+      alert('Payment service not found (HTTP ' + res.status + '). The /api endpoint is not running on this site.');
+    } else {
+      alert(data.message || 'Could not start payment. Please try again.');
+    }
   } catch (err) {
-    alert('Network error. Please try again.');
+    alert('Network error. Are you opening the page from a file? Use the deployed site or "npm run dev".');
   }
   btn.disabled = false;
   btn.textContent = label;

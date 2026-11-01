@@ -16,14 +16,15 @@ export async function onRequest({ request, env }) {
   if (request.method === 'GET') {
     try {
       const db = await ensureDatabase(env);
-      const [inquiries, newsletters, packages, blogPosts] = await Promise.all([
+      const [inquiries, newsletters, packages, blogPosts, payments] = await Promise.all([
         db.prepare('SELECT * FROM inquiries ORDER BY id DESC').all(),
         db.prepare('SELECT * FROM newsletters ORDER BY id DESC').all(),
         db.prepare('SELECT * FROM packages ORDER BY id DESC').all(),
-        db.prepare('SELECT * FROM blog_posts ORDER BY id DESC').all()
+        db.prepare('SELECT * FROM blog_posts ORDER BY id DESC').all(),
+        db.prepare('SELECT * FROM payments ORDER BY id DESC').all()
       ]);
 
-      return jsonResponse({ ok: true, inquiries, newsletters, packages, blogPosts });
+      return jsonResponse({ ok: true, inquiries, newsletters, packages, blogPosts, payments });
     } catch (error) {
       return jsonResponse({ ok: false, message: error.message || 'Unable to load admin data' }, 500);
     }

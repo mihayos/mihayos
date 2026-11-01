@@ -60,6 +60,7 @@
     <nav class="admin-nav">
       <button class="admin-nav-item active" data-view="overview"><i class="fa-solid fa-gauge"></i> Overview</button>
       <button class="admin-nav-item" data-view="inquiries"><i class="fa-solid fa-inbox"></i> Bookings &amp; Inquiries</button>
+      <button class="admin-nav-item" data-view="payments"><i class="fa-solid fa-credit-card"></i> Payments</button>
       <button class="admin-nav-item" data-view="packages"><i class="fa-solid fa-map"></i> Safari Packages</button>
       <button class="admin-nav-item" data-view="blog"><i class="fa-solid fa-newspaper"></i> Blog Posts</button>
       <button class="admin-nav-item" data-view="settings"><i class="fa-solid fa-gear"></i> Settings</button>
@@ -144,6 +145,18 @@
             <table class="admin-table">
               <thead><tr><th>Guest</th><th>Package</th><th>Dates</th><th>Received</th><th>Status</th><th></th></tr></thead>
               <tbody id="inquiriesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PAYMENTS ===== -->
+      <div class="admin-view" id="view-payments">
+        <div class="admin-panel">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Customer</th><th>Package</th><th>Qty</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="paymentsTableBody"></tbody>
             </table>
           </div>
         </div>

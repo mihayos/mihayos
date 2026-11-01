@@ -1,4 +1,4 @@
-let adminState = { inquiries: [], newsletters: [], packages: [], blogPosts: [] };
+let adminState = { inquiries: [], newsletters: [], packages: [], blogPosts: [], payments: [] };
 let adminAuthHeader = "";
 
 function getAuthHeader(username, password) {
@@ -25,7 +25,8 @@ async function refreshAdminData() {
     inquiries: data.inquiries || [],
     newsletters: data.newsletters || [],
     packages: data.packages || [],
-    blogPosts: data.blogPosts || []
+    blogPosts: data.blogPosts || [],
+    payments: data.payments || []
   };
   renderAll();
 }
@@ -149,6 +150,7 @@ function renderAll() {
   renderInquiries();
   renderPackages();
   renderBlog();
+  renderPayments();
 }
 
 function renderOverview() {
@@ -325,3 +327,18 @@ async function adminDeleteBlog(id) {
 }
 
 document.addEventListener("DOMContentLoaded", adminInit);
+
+function renderPayments() {
+  const tbody = document.getElementById("paymentsTableBody");
+  if (!tbody) return;
+  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  tbody.innerHTML = adminState.payments.map((p) => `
+    <tr>
+      <td><strong>${esc(p.customer_name) || "—"}</strong><br><small>${esc(p.customer_email)}${p.customer_phone ? " · " + esc(p.customer_phone) : ""}</small></td>
+      <td>${esc(p.package)}</td>
+      <td>${esc(p.quantity)}</td>
+      <td>${esc(p.currency)} ${Number(p.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}</td>
+      <td>${esc(p.status)}</td>
+      <td>${esc(p.created_at)}</td>
+    </tr>`).join("") || `<tr><td colspan="6" style="text-align:center; color:var(--c-muted); padding:24px;">No payments yet.</td></tr>`;
+}

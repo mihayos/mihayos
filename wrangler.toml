@@ -1,12 +1,15 @@
 name = "mihayos"
+main = "src/worker.js"
 compatibility_date = "2026-08-09"
 
 [assets]
 directory = "."
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
 
 [vars]
 ADMIN_USERNAME = "mihayosafaris"
-ADMIN_PASSWORD = "946862"
+ADMIN_PASSWORD = "admin"
 
 [[d1_databases]]
 binding = "DB"
