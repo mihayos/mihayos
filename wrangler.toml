@@ -6,7 +6,7 @@ directory = "."
 
 [vars]
 ADMIN_USERNAME = "mihayosafaris"
-ADMIN_PASSWORD = "admin"
+ADMIN_PASSWORD = "946862"
 
 [[d1_databases]]
 binding = "DB"
