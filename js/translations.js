@@ -6,7 +6,7 @@
 
 const TRANSLATIONS = {
 
-  pl: {
+  pl_a: {
     "meta.tagline": "Dzika Tanzania, Opowiedziana Właściwie",
     "nav.home": "Strona główna",
     "nav.about": "O nas",
