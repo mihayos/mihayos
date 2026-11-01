@@ -27,7 +27,7 @@ const WMO_MAP = {
   80: ["fa-cloud-showers-heavy", "Rain showers"], 81: ["fa-cloud-showers-heavy", "Rain showers"], 82: ["fa-cloud-showers-heavy", "Violent showers"],
   95: ["fa-cloud-bolt", "Thunderstorm"], 96: ["fa-cloud-bolt", "Thunderstorm w/ hail"], 99: ["fa-cloud-bolt", "Severe thunderstorm"],
 };
-function describeWeather(code) { return WMO_MAP[code] || ["fa-cloud", "Conditions unavailable"]; }
+function describeWeather(code) { const r = WMO_MAP[code] || ["fa-cloud", "Conditions unavailable"]; return [r[0], tr(r[1])]; }
 
 let spinRotation = 0;
 let spinBusy = false;
@@ -43,7 +43,7 @@ function spinRenderLabels() {
     const label = document.createElement("div");
     label.className = "spin-seg-label";
     label.style.transform = `rotate(${angle}deg) translateY(-128px)`;
-    label.innerHTML = `<span style="color:${i % 2 === 0 ? '#222' : '#fff'}">${spot.name}</span>`;
+    label.innerHTML = `<span style="color:${i % 2 === 0 ? '#222' : '#fff'}">${tr(spot.name)}</span>`;
     label.addEventListener("click", () => { if (!spinBusy) spinTo(i); });
     wheel.appendChild(label);
   });
@@ -59,10 +59,10 @@ async function fetchLiveWeather(spot) {
   const humidEl = document.getElementById("weatherHumidVal");
   const updatedEl = document.getElementById("weatherUpdatedVal");
 
-  nameEl.textContent = spot.name;
-  regionEl.textContent = spot.region;
-  descEl.textContent = "Fetching live conditions…";
-  updatedEl.textContent = "Contacting Open-Meteo…";
+  nameEl.textContent = tr(spot.name);
+  regionEl.textContent = tr(spot.region);
+  descEl.textContent = tr("Fetching live conditions…");
+  updatedEl.textContent = tr("Contacting Open-Meteo…");
 
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${spot.lat}&longitude=${spot.lng}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&timezone=Africa%2FNairobi`;
@@ -78,14 +78,14 @@ async function fetchLiveWeather(spot) {
     windEl.textContent = `${Math.round(cur.wind_speed_10m)} km/h`;
     humidEl.textContent = `${Math.round(cur.relative_humidity_2m)}%`;
     const t = new Date(cur.time);
-    updatedEl.textContent = `Live · updated ${t.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} EAT`;
+    updatedEl.textContent = `${tr("Live · updated")} ${t.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} EAT`;
   } catch (err) {
     tempEl.textContent = "--°C";
-    descEl.textContent = "Live weather unavailable right now";
+    descEl.textContent = tr("Live weather unavailable right now");
     iconEl.className = "fa-solid fa-cloud-question weather-icon";
     windEl.textContent = "--";
     humidEl.textContent = "--";
-    updatedEl.textContent = "Couldn't reach the weather service — check your connection and try Spin again.";
+    updatedEl.textContent = tr("Couldn't reach the weather service — check your connection and try Spin again.");
   }
 }
 

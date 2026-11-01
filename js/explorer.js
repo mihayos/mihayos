@@ -38,11 +38,11 @@ function explorerRender() {
   if (!img) return;
 
   img.style.opacity = 0;
-  setTimeout(() => { img.src = d.img; img.alt = d.name; img.style.opacity = 1; }, 120);
+  setTimeout(() => { img.src = d.img; img.alt = tr(d.name); img.style.opacity = 1; }, 120);
 
   gps.textContent = `${Math.abs(d.lat).toFixed(4)}°S, ${Math.abs(d.lng).toFixed(4)}°E`;
-  name.textContent = d.name;
-  desc.textContent = d.blurb;
+  name.textContent = tr(d.name);
+  desc.textContent = tr(d.blurb);
 
   mapFrame.src = `https://maps.google.com/maps?q=${d.lat},${d.lng}&z=${d.zoom}&output=embed`;
   mapLink.href = `https://www.google.com/maps?q=${d.lat},${d.lng}`;
@@ -62,8 +62,8 @@ function explorerBuildCartridges() {
     const btn = document.createElement("button");
     btn.className = "cartridge-btn";
     btn.setAttribute("data-index", i);
-    btn.setAttribute("aria-label", `Show ${d.name} on the map`);
-    btn.innerHTML = `<img src="${d.img}" alt="" loading="lazy"><span class="label">${d.name.split(" ")[0]}</span>`;
+    btn.setAttribute("aria-label", `${tr("Show on the map")}: ${tr(d.name)}`);
+    btn.innerHTML = `<img src="${d.img}" alt="" loading="lazy"><span class="label">${tr(d.name).split(" ")[0]}</span>`;
     btn.addEventListener("click", () => { explorerIndex = i; explorerRender(); });
     row.appendChild(btn);
   });
@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!document.getElementById("explorerImg")) return;
   explorerBuildCartridges();
   explorerRender();
+  document.addEventListener("langchange", () => { explorerBuildCartridges(); explorerRender(); });
 
   const prevBtn = document.getElementById("explorerPrev");
   const nextBtn = document.getElementById("explorerNext");

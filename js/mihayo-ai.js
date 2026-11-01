@@ -16,14 +16,14 @@ const AI_LOGO = "images/mihayo-ai-mascot.png";
 /* Keyword -> intent map, checked across all 4 languages so guests
    can type in whichever language they're already using. */
 const AI_INTENTS = [
-  { id: "bestTime", answerKey: "ai.a.bestTime", keywords: ["best time", "when to visit", "season", "wakati mzuri", "msimu", "mejor época", "meilleure période", "quand visiter", "saison"] },
-  { id: "kili", answerKey: "ai.a.kili", keywords: ["kilimanjaro", "climb", "route", "summit", "machame", "lemosho", "marangu", "panda mlima", "njia", "escalar", "ruta", "grimper", "itinéraire"] },
-  { id: "prices", answerKey: "ai.a.prices", keywords: ["price", "cost", "how much", "budget", "bei", "gharama", "precio", "costo", "cuánto", "prix", "coût", "combien"] },
-  { id: "zanzibar", answerKey: "ai.a.zanzibar", keywords: ["zanzibar", "beach", "nungwi", "paje", "stone town", "fukwe", "playa", "plage"] },
-  { id: "packing", answerKey: "ai.a.packing", keywords: ["pack", "wear", "clothes", "bring", "kufunga", "nguo", "empacar", "ropa", "emporter", "vêtements"] },
-  { id: "migration", answerKey: "ai.a.migration", keywords: ["migration", "wildebeest", "river crossing", "uhamiaji", "migración", "migration"] },
-  { id: "weather", answerKey: "ai.a.weather", keywords: ["weather", "temperature", "rain", "climate", "hali ya hewa", "clima", "météo", "temps"] },
-  { id: "human", answerKey: "ai.a.human", keywords: ["human", "person", "agent", "call", "whatsapp", "mtu", "persona", "personne", "appeler"] },
+  { id: "bestTime", answerKey: "ai.a.bestTime", keywords: ["najlepszy czas", "kiedy jechać", "pora roku", "best time", "when to visit", "season", "wakati mzuri", "msimu", "mejor época", "meilleure période", "quand visiter", "saison"] },
+  { id: "kili", answerKey: "ai.a.kili", keywords: ["kilimandżaro", "wejście", "trasa", "szczyt", "kilimanjaro", "climb", "route", "summit", "machame", "lemosho", "marangu", "panda mlima", "njia", "escalar", "ruta", "grimper", "itinéraire"] },
+  { id: "prices", answerKey: "ai.a.prices", keywords: ["cena", "koszt", "ile kosztuje", "budżet", "price", "cost", "how much", "budget", "bei", "gharama", "precio", "costo", "cuánto", "prix", "coût", "combien"] },
+  { id: "zanzibar", answerKey: "ai.a.zanzibar", keywords: ["zanzibar", "plaża", "zanzibar", "beach", "nungwi", "paje", "stone town", "fukwe", "playa", "plage"] },
+  { id: "packing", answerKey: "ai.a.packing", keywords: ["spakować", "zabrać", "ubrania", "pack", "wear", "clothes", "bring", "kufunga", "nguo", "empacar", "ropa", "emporter", "vêtements"] },
+  { id: "migration", answerKey: "ai.a.migration", keywords: ["migracja", "gnu", "przeprawa", "migration", "wildebeest", "river crossing", "uhamiaji", "migración", "migration"] },
+  { id: "weather", answerKey: "ai.a.weather", keywords: ["pogoda", "temperatura", "deszcz", "klimat", "weather", "temperature", "rain", "climate", "hali ya hewa", "clima", "météo", "temps"] },
+  { id: "human", answerKey: "ai.a.human", keywords: ["człowiek", "konsultant", "zadzwonić", "human", "person", "agent", "call", "whatsapp", "mtu", "persona", "personne", "appeler"] },
 ];
 
 function aiMatchIntent(text) {

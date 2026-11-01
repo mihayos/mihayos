@@ -16,6 +16,22 @@ function t(key, fallback) {
   return d[key] !== undefined ? d[key] : (e[key] !== undefined ? e[key] : fallback);
 }
 
+let _trRev = null;
+/* tr("English text") -> translated text for the current language (for JS-generated UI).
+   Looks up "@text" keys first, then any data-i18n key whose English text matches. */
+function tr(text) {
+  if (currentLang === DEFAULT_LANG || !text) return text;
+  const d = TRANSLATIONS[currentLang] || {};
+  if (d["@" + text] !== undefined) return d["@" + text];
+  if (!_trRev) {
+    _trRev = {};
+    const e = TRANSLATIONS[DEFAULT_LANG] || {};
+    Object.keys(e).forEach((k) => { if (k.indexOf("auto.") === 0) _trRev[e[k]] = k; });
+  }
+  const k = _trRev[text];
+  return k && d[k] !== undefined ? d[k] : text;
+}
+
 function applyTranslations(lang) {
   let chosen = (lang || "").toLowerCase();
   if (!TRANSLATIONS[chosen]) chosen = DEFAULT_LANG;

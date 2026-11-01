@@ -49,8 +49,8 @@ function currencyApplyAll(code) {
   document.querySelectorAll(".currency-live-note").forEach(el => {
     el.style.display = (code === "USD") ? "none" : "block";
     el.textContent = currencyIsLive
-      ? "Live exchange rate"
-      : "Approximate rate — live feed unavailable right now";
+      ? tr("Live exchange rate")
+      : tr("Approximate rate — live feed unavailable right now");
   });
 }
 

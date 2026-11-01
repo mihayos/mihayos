@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (successBox) successBox.style.display = "block";
         errorBox.style.display = "none";
       } catch (error) {
-        errorBox.textContent = error.message || "Unable to send enquiry";
+        errorBox.textContent = tr(error.message || "Unable to send enquiry");
         errorBox.style.display = "block";
       } finally {
         if (submitBtn) {
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btn) btn.textContent = "✓";
         f.reset();
       } catch (error) {
-        if (btn) btn.textContent = "Try again";
+        if (btn) btn.textContent = tr("Try again");
       } finally {
         setTimeout(() => {
           if (btn) {
